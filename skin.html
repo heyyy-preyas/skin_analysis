@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Skin Analysis - MedAI</title>
+    <link href="css/style.css" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- <script>
+        function navigateToUpload() {
+            document.getElementById('upload-section').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+    -->
+   <style>
+    .image-container {
+        position: absolute;
+        right: 80px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .image-container img {
+    width: 300%;  /* Increase size */
+    height: auto; /* Maintain aspect ratio */
+    max-width: 450px; /* Adjust based on preference */
+}
+
+</style>
+</head>
+<body>
+
+<div class="image-container">
+    <img src="images/pic.png" alt="Skin Analysis">
+</div>
+
+</body>
+    
+    
+    <style>
+        /* Theme colors */
+        :root {
+            --primary: #3498db;
+            --primary-dark: #2980b9;
+            --primary-light: #bde0ff;
+            --text-on-primary: white;
+        }
+        
+        /* Button styling */
+        .option, .gender-btn {
+            padding: 10px 20px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            color: #333;
+            font-weight: normal;
+        }
+        
+        .option:hover, .gender-btn:hover {
+            background: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .option.selected, .gender-btn.selected {
+            background: var(--primary);
+            color: var(--text-on-primary);
+            border: 2px solid var(--primary-dark);
+            font-weight: bold;
+            transform: scale(1.03);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+        }
+        
+        /* Dropdown styling */
+        .bg-gray-100 {
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .bg-gray-100 ul li {
+            padding: 10px;
+            border-radius: 8px;
+            margin: 5px 0;
+            transition: all 0.2s ease;
+        }
+        
+        .bg-gray-100 ul li:hover {
+            background: var(--primary-light);
+            transform: translateX(5px);
+        }
+        
+        /* Animation for selection */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse-animation {
+            animation: pulse 0.5s ease;
+        }
+        
+        .body-part { 
+            cursor: pointer; 
+            color: var(--primary); 
+            text-decoration: underline; 
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loading-screen">
+        <div class="text-center">
+            <div class="loading-icon mb-4"></div>
+            <h2 class="text-xl font-semibold text-gray-700">Loading Skin Analysis</h2>
+            <p class="text-gray-500">Preparing diagnostic tools...</p>
+        </div>
+    </div>
+ <!-- Fixed Header -->
+ <header class="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex items-center">
+          <a href="/" class="flex items-center">
+            <i data-lucide="stethoscope" class="h-8 w-8 text-blue-600"></i>
+            <span class="ml-2 text-xl font-bold text-gray-900">MedAI</span>
+          </a>
+        </div>
+        <div class="hidden md:flex md:items-center md:space-x-4">
+          <a href="/" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100">Home</a>
+          <a href="/skin.html" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100">Skin Analysis</a>
+          <a href="https://brain-tumor-detection-w5mqrnftavketep3dhna5g.streamlit.app/" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100">MRI Analysis</a>
+          <!-- <a href="#about" class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100">About</a> -->
+          <div class="flex space-x-4">
+            <a href="http://localhost:5000/login.html" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">Doctor Portal</a>
+            <!-- Additional links can be added here -->
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+  
+  <!-- Load Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+  
+
+
+
+    <div class="container">
+        <div class="left-section">
+            <!-- Left section content -->
+        
+    <main>
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Skin Selection</title>
+            <style>
+                .select-group {
+                    font-family: Arial, sans-serif;
+                    margin-bottom: 20px;
+                }
+        
+                .options {
+                    display: flex;
+                    gap: 10px;
+                }
+        
+                .menstruation-question {
+            display: none; /* Initially hidden */
+        }        
+        body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    text-align: center;
+}
+
+.gender-selection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+}
+
+.gender-selection .options {
+    display: flex;
+    gap: 10px; /* Adds spacing between buttons */
+    justify-content: center;
+}
+
+
+    
+        
+                .age-group
+                 {
+                    font-size: 14px;
+                    text-align: center; /* Centers the text */
+                    font-weight: bold;
+                    color: gray;
+                    margin-top: 5px;
+                    text-align: left;
+                }
+               
+
+
+                .tabs {
+                    display: flex;
+                    gap: 10px;
+                }
+
+                .tabs span {
+                    cursor: pointer;
+                    padding: 10px;
+                    margin: 5px;
+                    display: inline-block;
+                    background-color: #f0f0f0; /* Default background */
+                    border-radius: 5px;
+                    transition: background-color 0.3s ease, transform 0.2s ease;
+                }
+
+                .tabs span:hover {
+                    background-color: #dcdcdc;
+                    transform: scale(1.05);
+                }
+            </style>
+        </head>
+        <body>
+            
+            <div class="select-group">
+                
+                <h3 style="text-align: center; font-weight: bold; font-size: 28px;">Select Age Group</h3>
+                <div class="options" id="age-options">
+                    <div class="flex flex-col items-center justify-center text-center"></div>
+                    <div class="option" data-value="infant" onclick="selectOption('age', this, 'Age: Infant (< 2 years)')">Infant</div>
+                    <div class="option" data-value="child" onclick="selectOption('age', this, 'Age: Child (2-12 years)')">Child</div>
+                    <div class="option" data-value="teen" onclick="selectOption('age', this, 'Age: Teen (13-17 years)')">Teen</div>
+                    <div class="option" data-value="adult" onclick="selectOption('age', this, 'Age: Adult (18+ years)')">Adult</div>
+                </div>
+
+                <div id="agePlaceholder" class="age-group age-container">&lt; 2 years | 2-12 years | 13-17 years | 18+ years</div>
+            </div>
+        
+            <div class="gender-container">
+                <h3 style="text-align: center; font-weight: bold; font-size: 28px;">Select Gender</h3>
+                <div class="options" id="gender-options">
+                    <button class="gender-btn" data-value="female" onclick="selectGender(this, 'female')">Female</button>
+                    <button class="gender-btn" data-value="male" onclick="selectGender(this, 'male')">Male</button>
+                </div>
+            </div>
+            
+            <!-- Menstruation Question (Initially Hidden) -->
+            <div id="menstruation-question" style="display: none; margin-top: 10px;">
+                <label for="menstruation">Do you get your menstruation cycle regularly?</label>
+                <select id="menstruation" name="menstruation">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+            
+            <script>
+                function selectGender(button, gender) {
+                    //  Remove 'selected' class from all buttons
+                    document.querySelectorAll(".gender-btn").forEach(btn => btn.classList.remove("selected"));
+            
+                    // Add 'selected' class to the clicked button
+                    button.classList.add("selected");
+            
+                    // Get menstruation question div
+                    var menstruationDiv = document.getElementById("menstruation-question");
+            
+                    // Ensure the div is visible only when "Female" is selected
+                    menstruationDiv.style.display = gender === "female" ? "block" : "none";
+                }
+            </script>
+            
+            <style>
+                .gender-btn {
+                    padding: 10px 15px;
+                    border: none;
+                    background-color: #ccc;
+                    cursor: pointer;
+                    margin: 5px;
+                    border-radius: 5px;
+                    font-size: 16px;
+                    transition: 0.3s;
+                }
+            
+                .gender-btn.selected {
+                    background-color: #469fc0; /* Highlight selected button */
+                    color: white;
+                }
+            
+                #menstruation-question {
+                    padding: 10px;
+                    background-color: #f8f8f8;
+                    border-radius: 5px;
+                    width: fit-content;
+                    font-size: 16px;
+                }
+            </style>
+            
+
+            
+            
+        <!-- Symptom Checker Section -->
+        <div class="py-16 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Title -->
+                <h3 style="text-align: center; font-weight: bold; font-size: 28px;">Select Area for Analysis</h3>
+        
+                <!-- Selection Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-6">
+                    <!-- Face -->
+                    <div class="group cursor-pointer" onclick="showProceedButton('Face')">
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                            <div class="p-4"><h3 class="text-xl font-semibold">Face</h3></div>
+                        </div>
+                    </div>
+                    <!-- Arms -->
+                    <div class="group cursor-pointer" onclick="showProceedButton('Arms')">
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                            <div class="p-4"><h3 class="text-xl font-semibold">Arms</h3></div>
+                        </div>
+                    </div>
+                    <!-- Legs -->
+                    <div class="group cursor-pointer" onclick="showProceedButton('Legs')">
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                            <div class="p-4"><h3 class="text-xl font-semibold">Legs</h3></div>
+                        </div>
+                    </div>
+                    <!-- Feet -->
+                    <div class="group cursor-pointer" onclick="showProceedButton('Feet')">
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                            <div class="p-4"><h3 class="text-xl font-semibold">Feet</h3></div>
+                        </div>
+                    </div>
+                    <!-- Torso -->
+                    <div class="group cursor-pointer" onclick="showProceedButton('Torso')">
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                            <div class="p-4"><h3 class="text-xl font-semibold">Torso</h3></div>
+                        </div>
+                    </div>
+                    <!-- Neck -->
+                    <div class="group cursor-pointer" onclick="showProceedButton('Neck')">
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                            <div class="p-4"><h3 class="text-xl font-semibold">Neck</h3></div>
+                        </div>
+                    </div>
+                    <!-- Genetical Area -->
+                    <div class="group cursor-pointer" onclick="showProceedButton('Genetical Area')">
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                            <div class="p-4"><h3 class="text-xl font-semibold">Genetical Area and Groin</h3></div>
+                        </div>
+                    </div>
+                    <!-- Widespread -->
+                    <div class="group cursor-pointer" onclick="showProceedButton('Widespread')">
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                            <div class="p-4"><h3 class="text-xl font-semibold">Widespread</h3></div>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- Proceed Button (Initially Hidden, Placed Below the Grid) -->
+                <div id="proceedContainer" class="hidden text-center mt-6">
+                    <div class="relative border-2 border-dashed border-gray-400 rounded-lg p-8 text-center">
+                        <p id="selectedArea" class="text-lg font-semibold text-bold-black-700 mb-4"></p>
+                        <button onclick="redirectToAnalysis()" 
+                            class="bg-blue-500 text-white px-6 py-3 rounded-lg shadow-md 
+                                   hover:bg-blue-800 transition-all duration-300 transform hover:scale-105">
+                            Proceed to Analysis
+                        </button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>    
+        <script>
+         function showProceedButton(area) {
+    document.getElementById("selectedArea").innerText = "Selected Area: " + area;
+    const button = document.getElementById("proceedButton");
+    const container = document.getElementById("proceedContainer");
+
+    container.classList.remove("hidden");
+    button.classList.remove("hidden");
+
+    // Apply styles dynamically
+    button.style.fontSize = "18px"; // Text size
+    button.style.padding = "16px 36px"; // Increased space around text
+    button.style.borderRadius = "20px"; // Rounded edges
+    button.style.fontWeight = "bold"; // Bold text
+    button.style.letterSpacing = "0.5px"; // Better text spacing
+    button.style.backgroundColor = "#4285F4"; // Blue color
+    button.style.color = "#ffffff"; // White text
+    button.style.border = "none"; // No border
+    button.style.boxShadow = "0px 4px 6px rgba(0, 0, 0, 0.1)"; // Soft shadow
+    button.style.cursor = "pointer"; // Pointer cursor
+    button.style.transition = "all 0.3s ease-in-out"; // Smooth effect
+
+    // Hover effect
+    button.onmouseover = function () {
+        button.style.backgroundColor = "#3079ED"; // Darker blue on hover
+    };
+    button.onmouseout = function () {
+        button.style.backgroundColor = "#4285F4"; // Original color
+    };
+
+    // Ensure button is visible
+    button.style.opacity = "1";
+    button.style.transform = "translateY(0) scale(1)";
+}
+
+
+
+
+
+function redirectToAnalysis() {
+    window.location.href = "https://skin-disesase-detection-using-cnn-jthmjx3n9kcyxqd4wuh7mk.streamlit.app/";
+}
+
+        </script>
+        
+        
+        
+
+    </div>
+</div>
+
+<!-- <div id="upload-section" class="hidden py-12"> 
+    <div class="max-w-3xl mx-auto px-4"> 
+        <h2 class="text-2xl font-bold text-center mb-4" id="selected-body-part"></h2> 
+        <div id="upload-container" class="relative border-2 border-dashed rounded-lg p-8 text-center"> 
+            <label for="file-upload" class="cursor-pointer"> 
+                <span class="mt-2 block text-sm font-medium text-gray-900">
+                    Drag and drop an image, or click to upload
+                </span>
+                <input id="file-upload" type="file" class="hidden" accept="image/*"> 
+            </label>
+            <p class="mt-1 text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p> 
+            <div id="preview-container" class="hidden"> 
+                <img id="preview-image" class="max-h-96 mx-auto rounded-lg" alt="Preview"> 
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+<script>
+// Store user selections
+const userSelections = {
+    age: null,
+    gender: null,
+    bodyPart: null
+};
+
+// Function to select an option
+function selectOption(type, element, displayText) {
+    // Get all options in the group
+    const optionsContainer = element.parentElement;
+    const options = optionsContainer.querySelectorAll('.option');
+    
+    // Remove selected class from all options
+    options.forEach(opt => {
+        opt.classList.remove('selected');
+        opt.classList.remove('pulse-animation');
+    });
+    
+    // Add selected class to clicked option
+    element.classList.add('selected');
+    element.classList.add('pulse-animation');
+    
+    // Update the selection
+    userSelections[type] = element.getAttribute('data-value');
+    
+    // Update display text if provided
+    if (displayText && type === 'age') {
+        document.getElementById('agePlaceholder').textContent = displayText;
+    }
+}
+
+// Function to select gender
+function selectGender(element, gender) {
+    // Get all gender buttons
+    const genderButtons = document.querySelectorAll('.gender-btn');
+    
+    // Remove selected class from all buttons
+    genderButtons.forEach(btn => {
+        btn.classList.remove('selected');
+        btn.classList.remove('pulse-animation');
+    });
+    
+    // Add selected class to clicked button
+    element.classList.add('selected');
+    element.classList.add('pulse-animation');
+    
+    // Update the gender selection
+    userSelections.gender = gender;
+    
+    // Show/hide menstruation question based on gender
+    const menstruationQuestion = document.getElementById('menstruationQuestion');
+    if (gender === 'female') {
+        menstruationQuestion.classList.add('show-menstruation');
+    } else {
+        menstruationQuestion.classList.remove('show-menstruation');
+    }
+}
+
+// Toggle dropdown visibility
+function toggleDropdown(id) { 
+    // Close any open dropdowns first
+    const allDropdowns = document.querySelectorAll('[id$="-dropdown"]');
+    allDropdowns.forEach(dropdown => {
+        if (dropdown.id !== id && !dropdown.classList.contains('hidden')) {
+            dropdown.classList.add('hidden');
+        }
+    });
+    
+    // Toggle the clicked dropdown
+    document.getElementById(id).classList.toggle("hidden");
+    event.stopPropagation(); // Prevent immediate click from closing
+}
+
+// // Start analysis with selected body part
+// function startAnalysis(area) {
+//     if (!area) {
+//         area = 'widespread';
+//     }
+    
+//     // Store the selected body part
+//     userSelections.bodyPart = area;
+    
+//     // Update the selected part title
+//     document.getElementById("selected-body-part").innerText = "Upload an image for: " + 
+//         (area.charAt(0).toUpperCase() + area.slice(1).replace(/-/g, ' '));
+    
+//     // Show upload section and scroll to it
+//     document.getElementById("upload-section").classList.remove("hidden");
+//     document.getElementById("upload-section").scrollIntoView({ behavior: 'smooth' });
+// }
+
+// // Handle file upload preview
+// document.getElementById("file-upload").addEventListener("change", function (event) {
+//     const file = event.target.files[0]; // Get selected file
+//     if (file) {
+//         const reader = new FileReader();
+//         reader.onload = function (e) {
+//             document.getElementById("preview-image").src = e.target.result; // Show selected image
+//             document.getElementById("preview-container").classList.remove("hidden"); // Display preview
+//         };
+//         reader.readAsDataURL(file); // Read file data
+//     }
+// });
+
+// Close dropdowns when clicking outside
+document.addEventListener('click', function(event) {
+    if (!event.target.closest('.group')) {
+        const allDropdowns = document.querySelectorAll('[id$="-dropdown"]');
+        allDropdowns.forEach(dropdown => {
+            dropdown.classList.add('hidden');
+        });
+    }
+});
+
+// Initialize loading screen behavior
+window.addEventListener("load", function() {
+    setTimeout(() => {
+        document.getElementById("loading-screen").style.display = "none";
+    }, 1000);
+});
+</script>
+    
+   
+    
+    
+
+<!-- Footer -->
+<footer class="bg-gray-900 text-white w-full py-6">
+    <div class="px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-wrap justify-between text-left">   
+            <!-- Acknowledgments -->
+            <div class="w-full md:w-1/4 mb-4 md:mb-0">
+              <h3 class="font-semibold mb-3" style="font-size: 1.45rem;">Acknowledgments</h3>
+              <p class="text-gray-100">Supported by: <span class="font-bold text-white">Code Unnati Innovation Marathon 3.0</span></p>
+            </div>
+             <!-- Quick Links -->
+            <div class="w-full md:w-1/4 mb-4 md:mb-0">
+                <h3 class="text-lg font-semibold mb-3">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="/" class="text-gray-400 hover:text-white underline">Home</a></li>
+                    <li><a href="/skin.html" class="text-gray-400 hover:text-white underline">Skin Analysis</a></li>
+                    <li><a href="https://brain-tumor-detection-w5mqrnftavketep3dhna5g.streamlit.app/" class="text-gray-400 hover:text-white underline">MRI Analysis</a></li>
+                    <li><a href="/privacy.html" class="text-gray-400 hover:text-white underline">Privacy Policy</a></li>
+                    <li><a href="/terms.html" class="text-gray-400 hover:text-white underline">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <!-- Contact -->
+  <div class="w-full md:w-1/4">
+    <h3 class="text-xl font-semibold mb-3">Team Details</h3>
+  
+    <p class="text-base font-semibold">Frontend Development:</p>
+    <p class="text-base text-gray-10">Dhrumi Patel</p>
+    <p class="text-base text-gray-10">Preyas Pandya</p>
+  
+    <p class="text-base font-semibold">Backend Development:</p>
+    <p class="text-base text-gray-10">Yash Patil</p>
+    <p class="text-base text-gray-10">Mitesh Uttekar</p>
+  
+    <p class="text-base font-semibold">Presentation:</p>
+    <p class="text-base text-gray-10">Jhanvi Ravaliya</p>
+  </div>
+  
+  
+  
+                
+            </div>
+        </div>
+        <div class="mt-6 pt-4 border-t border-gray-800 text-center text-gray-200">
+            <p class="text-xl">AI-generated insights do not replace professional medical advice. Always consult a doctor.</p>
+            <p class="text-base text-gray-10">© 2025 MedAI. All rights reserved.</p>
+        </div>
+    </div>
+  </footer>
+  
+</body>
+</html>
